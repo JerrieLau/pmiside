@@ -1,0 +1,234 @@
+.user,.project,.date {
+	width: 200px;
+	height: 200px;
+	font-size: 16px;
+	margin: 10px auto 0;
+	padding-top: 30px;
+	font-family: '微软雅黑';
+	background: #fff;
+	margin: 50px;
+	box-shadow: 0 8px 50px rgba(21, 62, 78, 0.8);
+}
+
+input[name="message.month"],input[name="message.year"] {
+	visibility: hidden;
+}
+
+.account-control {
+	font-size: 20px;
+	font-family: '微软雅黑';
+	margin: 20px auto 0;
+	padding-top: 30px;
+	height: 459px;
+	width: 600px;
+	position: absolute;
+	top: 120px;
+	left: 30%;
+	background-image: url("../images/printer.png");
+}
+
+#logout {
+	position: absolute;
+	right:33%;
+	top: 460px;
+}
+
+.export-button {
+	position: absolute;
+	top: 230px;
+	left: 65%;
+}
+
+.user {
+	position: absolute;
+	left: 41%;
+	top: 10px;
+}
+
+.project {
+	position: absolute;
+	left: 41%;
+	top: 30px;
+}
+
+.date {
+	position: absolute;
+	left: 41%;
+	top: 50px;
+}
+
+.exporter {
+	position: absolute;
+	left: 38%;
+	top: 380px;
+	width: 200px;
+	height: 240px;
+	margin: 1px;
+}
+
+.progressBar {
+	position: absolute;
+	top: 210px;
+	left: 30%;
+	visibility: hidden;
+}
+
+#download {
+	background-image: url("../images/download.png");
+	visibility: hidden;
+	position: absolute;
+	top: 8px;
+}
+
+.user span,.date span,.project span {
+	color: graytext;
+}
+
+.user input,.date input,.project input {
+	width: 160px;
+	height: 25px;
+}
+
+.date .date-title {
+	position: absolute;
+	left: 15px;
+	text-align: center;
+	font-size: 24px;
+	font-weight: bold;
+}
+
+.date input[name='exportDate'] {
+	left: 15px;
+	position: absolute;
+	background: transparent;
+	top: 110px;
+}
+
+.user .user-title {
+	position: absolute;
+	left: 15px;
+	text-align: center;
+	font-size: 24px;
+	font-weight: bold;
+	top: 20px;
+}
+
+.user input[name='message.pmisUserid'] {
+	left: 15px;
+	position: absolute;
+	background: transparent;
+	top: 60px;
+}
+
+.user .user-icon {
+	position: absolute;
+	left: 18px;
+	top: 63px;
+}
+
+.user input[name='message.pmisPassword'] {
+	position: absolute;
+	left: 15px;
+	top: 100px;
+	background: transparent;
+}
+
+.user .password-icon {
+	position: absolute;
+	top: 103px;
+	left: 18px;
+}
+
+.user input[name='message.pmisName'] {
+	left: 15px;
+	position: absolute;
+	background: transparent;
+	top: 140px;
+}
+
+.user .name-icon {
+	position: absolute;
+	left: 18px;
+	top: 143px;
+}
+
+.user input[name='message.supplier'] {
+	left: 15px;
+	position: absolute;
+	background: transparent;
+	top: 180px;
+}
+
+.user .supplier-icon {
+	position: absolute;
+	left: 18px;
+	top: 183px;
+}
+
+
+/*
+* Project段
+*/
+.project .project-title {
+	position: absolute;
+	left: 15px;
+	text-align: center;
+	font-size: 24px;
+	font-weight: bold;
+} 
+
+.project input[name='message.pmisProjectName'] {
+	left: 15px;
+	position: absolute;
+	background: transparent;
+	top: 80px;
+}
+
+.project .projectname-icon {
+	position: absolute;
+	left: 18px;
+	top: 80px;
+}
+
+.project input[name='message.pmisProjectRole'] {
+	position: absolute;
+	left: 15px;
+	top: 130px;
+	background: transparent;
+}
+
+.project .projectrole-icon {
+	position: absolute;
+	top: 130px;
+	left: 18px;
+}
+
+.project input[name='message.pmisOfficePlace'] {
+	left: 15px;
+	position: absolute;
+	background: transparent;
+	top: 180px;
+}
+
+.project .place-icon {
+	position: absolute;
+	left: 18px;
+	top: 182px;
+}
+
+#settingsicon {
+	position: absolute;
+	top: 30px;
+	right: 100px;
+}
+
+#option{
+	visibility: hidden;
+	position:absolute;
+	width:200px;
+	height:100px;
+	box-shadow:inset 0 1px 0 rgb(86, 174, 251), 0 0 10px 3px rgba(74, 162, 241, 0.5);
+	top:100px;
+	right:'30px;
+}
+

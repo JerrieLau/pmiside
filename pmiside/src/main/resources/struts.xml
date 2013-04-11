@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.custom.i18n.resources" value="i18n/pmisaddon"></constant>
+	<constant name="struts.objectFactory" value="spring" />
+	<package name="pmisaddons" extends="struts-default">
+		<interceptors>
+			<interceptor name="authorityInterceptor" class="authorityInterceptor"/>
+			<interceptor-stack name="appDefaultStack">
+				<interceptor-ref name="defaultStack">
+					<param name="exception.logEnabled">true</param>
+					<param name="exception.logLevel">ERROR</param>
+				</interceptor-ref>
+				<interceptor-ref name="authorityInterceptor" />
+			</interceptor-stack>
+		</interceptors>
+
+		<default-interceptor-ref name="appDefaultStack" />
+
+		<global-results>
+			<result name="error">/error.jsp</result>
+			<result name="login">/login.jsp</result>
+		</global-results>
+
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception" result="error" />
+		</global-exception-mappings>
+
+		<action name="register" class="registerAction" method="execute">
+			<result name="success" type="redirectAction">enterexportmwork</result>
+			<result name="input">/regist.jsp</result>
+		</action>
+		
+		<action name="login" class="loginaction" method="execute">
+			<result name="input">/login.jsp</result>
+			<result name="success" type="redirectAction">enterexportmwork</result>
+		</action>
+		
+		<action name="mworkexporter" class="mworkexportaction" method="execute" />
+		
+		<action name="getprogress" class="mworkexportaction" method="getProgress" />
+		
+		<action name="logout" class="logoutaction" method="execute" />
+		
+		<action name="enterexportmwork" class="mworkexportaction" method="preExport">
+			<result name="success">/exportmwork.jsp</result>
+		</action>
+	</package>
+
+</struts>

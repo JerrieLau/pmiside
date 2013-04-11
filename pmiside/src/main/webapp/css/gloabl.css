@@ -1,0 +1,16 @@
+body {
+	/* background: url(../images/background.jpg) no-repeat center fixed; */
+	background-size: 100% 100%;
+}
+
+.backgroundmsg {
+	display: none;	
+}
+
+#copyright {
+	position: absolute;
+	bottom: 30px;
+	right:5px;
+	font-family: fantasy;
+	color: silver;
+}
