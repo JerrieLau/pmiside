@@ -14,7 +14,7 @@
 
 	<!-- scans the classpath for annotated components (including @Repostory and @Service that will be auto-registered as Spring 
 		beans -->
-	<context:component-scan base-package="com.yxtec.pmisaddons" />
+	<context:component-scan base-package="com.yxtec.pmiside" />
 
 	<!-- methods or classes needing to run in a complete transaction will be annotated with Transactional -->
 	<tx:annotation-driven />

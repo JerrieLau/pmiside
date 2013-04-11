@@ -19,25 +19,25 @@ import com.yxtec.pmiside.action.MWorkExporter.ExportServceBackgroundThread;
 @Component("exportObserver")
 public class ExportObserver {
 	
-	@After("execution(* com.yxtec.pmisaddons.domain.export.fetcher.PMISMonthRecordDataFetcher.fetchPMISData(..))")
+	@After("execution(* com.yxtec.pmiside.domain.export.fetcher.PMISMonthRecordDataFetcher.fetchPMISData(..))")
 	public void notificationFetchedData() {
 		ExportServceBackgroundThread esbt = (ExportServceBackgroundThread) Thread.currentThread();
 		esbt.getHs().setAttribute("progress", 60);
 	}
 
-	@After("execution(* com.yxtec.pmisaddons.domain.export.ananlysis.PMISMonthDataAnanlysiser.ananlysisData(..))")
+	@After("execution(* com.yxtec.pmiside.domain.export.ananlysis.PMISMonthDataAnanlysiser.ananlysisData(..))")
 	public void notificationAnanlysisedData() {
 		ExportServceBackgroundThread esbt = (ExportServceBackgroundThread) Thread.currentThread();
 		esbt.getHs().setAttribute("progress", 70);
 	}
 
-	@After("execution(* com.yxtec.pmisaddons.domain.export.reportor.WYMonthReportCreater.createReport(..))")
+	@After("execution(* com.yxtec.pmiside.domain.export.reportor.WYMonthReportCreater.createReport(..))")
 	public void notificationCreatedReport() {
 		ExportServceBackgroundThread esbt = (ExportServceBackgroundThread) Thread.currentThread();
 		esbt.getHs().setAttribute("progress", 95);
 	}
 	
-	@AfterThrowing("execution(* com.yxtec.pmisaddons.domain.export.communication.PMISMonthDataFetchCommunication.sendRequest(..))")
+	@AfterThrowing("execution(* com.yxtec.pmiside.domain.export.communication.PMISMonthDataFetchCommunication.sendRequest(..))")
 	public void notificationNetworkError() {
 		ExportServceBackgroundThread esbt = (ExportServceBackgroundThread) Thread.currentThread();
 		if(esbt.getHs().getAttribute("exporterror") == null) {
@@ -45,7 +45,7 @@ public class ExportObserver {
 		}
 	}
 	
-	@AfterThrowing("execution(* com.yxtec.pmisaddons.domain.export.fetcher.PMISMonthRecordDataFetcher.*(..))")
+	@AfterThrowing("execution(* com.yxtec.pmiside.domain.export.fetcher.PMISMonthRecordDataFetcher.*(..))")
 	public void notificationLoginError() {
 		ExportServceBackgroundThread esbt = (ExportServceBackgroundThread) Thread.currentThread();
 		if(esbt.getHs().getAttribute("exporterror") == null) {
@@ -53,7 +53,7 @@ public class ExportObserver {
 		}
 	}
 	
-	@AfterThrowing("execution(* com.yxtec.pmisaddons.domain.export.ananlysis.PMISMonthDataAnanlysiser.ananlysisData(..))")
+	@AfterThrowing("execution(* com.yxtec.pmiside.domain.export.ananlysis.PMISMonthDataAnanlysiser.ananlysisData(..))")
 	public void notificationAnanlysisError() {
 		ExportServceBackgroundThread esbt = (ExportServceBackgroundThread) Thread.currentThread();
 		if(esbt.getHs().getAttribute("exporterror") == null) {
@@ -61,7 +61,7 @@ public class ExportObserver {
 		}
 	}
 	
-	@AfterThrowing("execution(* com.yxtec.pmisaddons.domain.export.reportor.WYMonthReportCreater.createReport(..))")
+	@AfterThrowing("execution(* com.yxtec.pmiside.domain.export.reportor.WYMonthReportCreater.createReport(..))")
 	public void notificationExportFileError() {
 		ExportServceBackgroundThread esbt = (ExportServceBackgroundThread) Thread.currentThread();
 		if(esbt.getHs().getAttribute("exporterror") == null) {
