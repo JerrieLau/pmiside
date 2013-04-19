@@ -46,6 +46,7 @@ $(document).ready(function(){
 			$("#password").poshytip('show');
 			return;
 		}
+		$("#password").val($.md5(password));
 		$("form[class='login-form']")[0].submit();
 	});
 });

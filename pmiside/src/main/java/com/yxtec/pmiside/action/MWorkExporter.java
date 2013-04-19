@@ -65,6 +65,8 @@ public class MWorkExporter extends ActionSupport {
 		PMISExportUserMessage msg = exportService.findPMISExportUserMessageByuserID(user.getUserId());
 		if(msg == null) {
 			msg = new PMISExportUserMessage();
+		} else {
+			ServletActionContext.getRequest().setAttribute("saved", "true");
 		}
 		ServletActionContext.getRequest().setAttribute("msg", msg);
 		return SUCCESS;
@@ -131,8 +133,8 @@ public class MWorkExporter extends ActionSupport {
 	private void callExportService(HttpSession hs){
 		try {
 			String filename = exportService.exportMonthWorkReport(message);
-			hs.setAttribute("progress", 100);
 			hs.setAttribute("filename", filename);
+			hs.setAttribute("progress", 100);
 		} catch (Exception e) {
 			LoggerFactory.getLogger(MWorkExporter.class).error(e.getLocalizedMessage(), e);
 		}

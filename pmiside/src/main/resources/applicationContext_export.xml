@@ -18,6 +18,7 @@
 		<property name="indexReq" ref="indexReq" />
 		<property name="loginReq" ref="loginReq" />
 		<property name="queryReq" ref="queryReq" />
+		<property name="logoutReq" ref="logoutReq" />
 		<property name="checkedStatus" value="302" />
 		<property name="checkedLocation" value="http://mis.aostarit.com:9000/pmis/bsp/menu.cmd" />
 	</bean>
@@ -39,6 +40,10 @@
 	<bean id="queryReq" class="com.yxtec.pmiside.domain.export.communication.HTTPRequest" scope="prototype">
 		<property name="url" value="http://mis.aostarit.com:9000/pmis/pmis-web/empLog/queryEmpLog.so" />
 		<property name="method" value="POST" />
+	</bean>
+	<bean id="logoutReq" class="com.yxtec.pmiside.domain.export.communication.HTTPRequest" scope="prototype">
+		<property name="url" value="http://mis.aostaryh.com:9000/pmis/bsp/logout.cmd?method=logout" />
+		<property name="method" value="GET" />
 	</bean>
 
 	<!-- Ananlysiser -->

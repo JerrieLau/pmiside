@@ -22,6 +22,7 @@ import com.yxtec.pmiside.domain.export.fetcher.IFetchInput;
 import com.yxtec.pmiside.domain.export.fetcher.IPMISDataFetcher;
 import com.yxtec.pmiside.domain.export.reportor.IReportCreater;
 import com.yxtec.pmiside.mode.PMISExportUserMessage;
+import com.yxtec.pmiside.security.SecurityUtilities;
 
 /**
  * @author Jerrie
@@ -44,7 +45,9 @@ public class ExportServiceImpl implements IExportService {
 	private IReportCreater reportCreater;
 	
 	private String basepath;
-
+	
+	@Resource(name="securityUtilities")
+	private SecurityUtilities su;
 
 	@Override
 	public String exportMonthWorkReport(PMISExportUserMessage pum) throws Exception {

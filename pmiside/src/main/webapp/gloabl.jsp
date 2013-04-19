@@ -6,4 +6,5 @@
 <script type="text/javascript" src="script/jquery-migrate-1.1.1.js"></script>
 <script type="text/javascript" src="script/jquery.progressbar.min.js"></script>
 <script type="text/javascript" src="script/jquery.poshytip.min.js"></script>
+<script type="text/javascript" src="script/jquery.md5.js"></script>
 <script type="text/javascript" src="script/gloabl.js"></script>

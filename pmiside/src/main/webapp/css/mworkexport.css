@@ -225,10 +225,36 @@ input[name="message.month"],input[name="message.year"] {
 #option{
 	visibility: hidden;
 	position:absolute;
-	width:200px;
-	height:100px;
+	width:150px;
+	height:170px;
 	box-shadow:inset 0 1px 0 rgb(86, 174, 251), 0 0 10px 3px rgba(74, 162, 241, 0.5);
 	top:100px;
-	right:'30px;
+	right:30px;
+	
+	font-family: '微软雅黑';
+	font-size: 16px;
 }
 
+#option .save-checkbox {
+	position: absolute;
+	left: 20px;
+	top: 30px;
+}
+
+#option .save-icon {
+	position: absolute;
+	left: 40px;
+	top: 30px;
+}
+
+#option .subscribe-checkbox {
+	position: absolute;
+	left: 20px;
+	top: 60px;
+}
+
+#option .subscribe-icon {
+	position: absolute;
+	left: 40px;
+	top: 60px;
+}

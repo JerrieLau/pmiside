@@ -226,6 +226,9 @@ $(document).ready(function(){
 		$('input[name="message.year"]')[0].value = filledDate.getFullYear();
 		$('input[name="message.month"]')[0].value = filledDate.getMonth() + 1;
 		
+		
+		var subscribed = $('.subscribe-checkbox').attr('checked') ? 'true' : 'false';
+		var saved = $('.save-checkbox').attr('checked') ? 'true' : 'false';
 		var postdata = {
 			      'message.pmisUserid':$('input[name="message.pmisUserid"]').val(),
 				  'message.pmisPassword':$('input[name="message.pmisPassword"]').val(),
@@ -236,22 +239,10 @@ $(document).ready(function(){
 				  'message.month':$('input[name="message.month"]').val(),
 				  'message.year':$('input[name="message.year"]').val(),
 				  'message.supplier':$('input[name="message.supplier"]').val(),
+				  'needsave':saved,
+				  'message.subscribed':subscribed,
 		};
 		
-		if($('input[name="needsave"]').attr('checked')){
-			postdata = {
-				      'message.pmisUserid':$('input[name="message.pmisUserid"]').val(),
-					  'message.pmisPassword':$('input[name="message.pmisPassword"]').val(),
-					  'message.pmisName':$('input[name="message.pmisName"]').val(),
-					  'message.pmisOfficePlace':$('input[name="message.pmisOfficePlace"]').val(),
-					  'message.pmisProjectName':$('input[name="message.pmisProjectName"]').val(),
-					  'message.pmisProjectRole':$('input[name="message.pmisProjectRole"]').val(),
-					  'message.month':$('input[name="message.month"]').val(),
-					  'message.year':$('input[name="message.year"]').val(),
-					  'message.supplier':$('input[name="message.supplier"]').val(),
-					  'needsave':$('input[name="needsave"]').val(),
-			};
-		} 
 		$.post("mworkexporter", postdata, function(data, status){
 			if(status == 'success'){
 				$('#pb1').css("visibility", "visible");
@@ -290,7 +281,7 @@ $(document).ready(function(){
 	});
 	
 	$('#logout').click(function(){
-		$.get('logout', function(){
+		$.ajax({url:"logout", timeout:2000, complete:function(){
 			//重置标记
 			flag = false;
 			//清除进度轮询
@@ -299,22 +290,36 @@ $(document).ready(function(){
 			$('#download').css('visibility', "hidden");
 			//清除TIPs
 			destroyTips();
+			window.open('','_self','');
 			window.close();
-		});
+		}});
+	});
+	
+	//设置页面选项框
+	if($('#saved').text()=='true') {
+		$('.save-checkbox').attr('checked', 'checked');
+		if($('#subscribed').text() == 'true') {
+			$('.subscribe-checkbox').attr('checked', 'checked');
+		}
+	} else {
+		$('.subscribe-checkbox').attr('disabled', 'disabled');
+	}
+	
+	$('.save-checkbox').click(function(){
+		if($(this).attr('checked')){
+			$('.subscribe-checkbox').removeAttr('disabled');
+		} else {
+			$('.subscribe-checkbox').removeAttr('checked');
+			$('.subscribe-checkbox').attr('disabled', 'disabled');
+		}
 	});
 	
 	$('#settingsicon').click(function(){
+		var visibility = $('#option').css('visibility') == 'visible' ? 'hidden': 'visible'; 
 		$('#option').css({
-			'visibility':'visible',
-			'position':'absolute',
-			'width':'200px',
-			'height':'100px',
-			'box-shadow':'inset 0 1px 0 rgb(86, 174, 251), 0 0 10px 3px rgba(74, 162, 241, 0.5)',
-			'top':'100px',
-			'right':'30px'
+			'visibility': visibility
 		});
 	});
-	
 });
 
 function destroyTips(){

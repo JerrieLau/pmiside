@@ -3,6 +3,8 @@
  */
 package com.yxtec.pmiside.dao;
 
+import java.util.List;
+
 import com.yxtec.pmiside.mode.PMISExportUserMessage;
 
 /**
@@ -18,5 +20,7 @@ public interface IPMISExportUserMessageDaoJpa {
 	public void update(PMISExportUserMessage pum);
 
 	public void delete(PMISExportUserMessage pum);
+	
+	public List<PMISExportUserMessage> findSubscribedPMISExportUserMessage();
 
 }

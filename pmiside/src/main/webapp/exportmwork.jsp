@@ -77,6 +77,8 @@
 		<span id="logouttips"><s:text name="ui.exportmwork.logout" /></span>
 		<span id="error"><s:text name="ui.exportmwork.error" /></span>
 		<span id="exporttips"><s:text name="ui.exportmwork.action" /></span>
+		<span id="saved"><s:property value="#request.saved"/></span>
+		<span id="subscribed"><s:property value="#request.msg.subscribed"/></span>
 	</div>
 	
 	<%@ include file="copyright.jsp" %>

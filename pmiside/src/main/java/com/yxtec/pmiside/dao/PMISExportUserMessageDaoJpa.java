@@ -3,6 +3,8 @@
  */
 package com.yxtec.pmiside.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -57,10 +59,13 @@ public class PMISExportUserMessageDaoJpa implements IPMISExportUserMessageDaoJpa
 			managedPum.setPmisProjectName(pum.getPmisProjectName());
 			managedPum.setPmisProjectRole(pum.getPmisProjectRole());
 			managedPum.setSupplier(pum.getSupplier());
+			managedPum.setSubscribed(pum.getSubscribed());
 		} else {
 			pum.setUser(entityManager.merge(pum.getUser()));
 			entityManager.persist(pum);
 		}
+		entityManager.flush();
+		entityManager.detach(pum);
 	}
 
 	/*
@@ -89,6 +94,14 @@ public class PMISExportUserMessageDaoJpa implements IPMISExportUserMessageDaoJpa
 	@PersistenceContext(unitName = "pmisaddonsPU")
 	public void setEntityManager(EntityManager entityManager) {
 		this.entityManager = entityManager;
+	}
+
+	@Override
+	public List<PMISExportUserMessage> findSubscribedPMISExportUserMessage() {
+		TypedQuery<PMISExportUserMessage> query = entityManager.createQuery(
+				"select m from PMISExportUserMessage m where m.subscribed=:subscribed", PMISExportUserMessage.class);
+		query.setParameter("subscribed", "true");
+		return query.getResultList();
 	}
 
 }

@@ -78,6 +78,8 @@ $(document).ready(function(){
 			return;
 		}
 		
+		//MD5 password
+		$("#password").val($.md5(password));
 		$("form[class='regist-form']")[0].submit();
 	});
 });

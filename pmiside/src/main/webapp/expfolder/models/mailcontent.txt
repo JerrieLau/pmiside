@@ -1,0 +1,5 @@
+<h2>亲爱的${name}：</h2>
+&nbsp;&nbsp;&nbsp;&nbsp;<h4>${year}年${month}月的工作记录单已自动导出，请查收附件！<h4/>
+&nbsp;&nbsp;&nbsp;&nbsp;<h4>此邮件是自动发送邮件，请不要直接回复！</h4>
+	
+	

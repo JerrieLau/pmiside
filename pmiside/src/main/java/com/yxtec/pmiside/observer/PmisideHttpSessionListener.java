@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.yxtec.pmiside.action.observer;
+package com.yxtec.pmiside.observer;
 
 import java.io.File;
 

@@ -20,10 +20,79 @@ import com.yxtec.pmiside.domain.export.communication.ICommunication;
 public class PMISMonthRecordDataFetcher implements IPMISDataFetcher {
 
 	private ICommunication communication;
-	
 	private String checkedStatus;
-	
 	private String checkedLocation;
+	private HTTPRequest indexReq;
+	private HTTPRequest loginReq;
+	private HTTPRequest queryReq;
+	private HTTPRequest logoutReq;
+
+	@Override
+	public String fetchPMISData(IFetchInput in) throws Exception {
+		String result = null;
+		FetchMonthRecordInput fmri = (FetchMonthRecordInput) in;
+
+		// Request Index.
+		index();
+
+		// Login.
+		login(fmri);
+		
+		// Query.
+		result = query(fmri);
+		
+		logout();
+		
+		return result;
+	}
+
+	private void logout() throws Exception {
+		communication.sendRequest(logoutReq);
+	}
+
+	private void login(FetchMonthRecordInput fmri) throws Exception {
+		// Login.
+		loginReq.setContent("j_username=" + fmri.username + "&j_password=" + fmri.password);
+		HttpResponse rsp = communication.sendRequest(loginReq);
+		String location = rsp.getFirstHeader("Location").getValue();
+		if(!(String.valueOf(rsp.getStatusLine().getStatusCode()).equals(checkedStatus) && location.equals(checkedLocation))) {
+			throw new Exception("PMIS登录失败，请检查输入的用户名及密码！");
+		}
+	}
+
+	private void index() throws Exception {
+		// Request Index.
+		communication.sendRequest(indexReq);
+	}
+
+	private String query(FetchMonthRecordInput fmri) throws Exception {
+		// Query Data
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(fmri.year, fmri.month - 1, 1);
+		calendar.get(Calendar.YEAR);
+		calendar.get(Calendar.MONTH);
+		calendar.get(Calendar.DAY_OF_MONTH);
+		Date minDate = calendar.getTime();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String start = sdf.format(minDate);
+		calendar.set(fmri.year, fmri.month - 1, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+		calendar.get(Calendar.YEAR);
+		calendar.get(Calendar.MONTH);
+		calendar.get(Calendar.DAY_OF_MONTH);
+		Date maxDate = calendar.getTime();
+		String end = sdf.format(maxDate);
+		queryReq.setContent("beginLogTime=" + start + "&endLogTime=" + end + "&page=1&rows=31");
+		communication.sendRequest(queryReq);
+		return communication.getContent();
+	}
+	
+	public HTTPRequest getLogoutReq() {
+		return logoutReq;
+	}
+
+	public void setLogoutReq(HTTPRequest logoutReq) {
+		this.logoutReq = logoutReq;
+	}
 	
 	public String getCheckedStatus() {
 		return checkedStatus;
@@ -71,58 +140,5 @@ public class PMISMonthRecordDataFetcher implements IPMISDataFetcher {
 
 	public void setQueryReq(HTTPRequest queryReq) {
 		this.queryReq = queryReq;
-	}
-
-	private HTTPRequest indexReq;
-	private HTTPRequest loginReq;
-	private HTTPRequest queryReq;
-
-	@Override
-	public String fetchPMISData(IFetchInput in) throws Exception {
-		FetchMonthRecordInput fmri = (FetchMonthRecordInput) in;
-
-		// Request Index.
-		index();
-
-		// Login.
-		login(fmri);
-		
-		return query(fmri);
-	}
-
-	private void login(FetchMonthRecordInput fmri) throws Exception {
-		// Login.
-		loginReq.setContent("j_username=" + fmri.username + "&j_password=" + fmri.password);
-		HttpResponse rsp = communication.sendRequest(loginReq);
-		String location = rsp.getFirstHeader("Location").getValue();
-		if(!(String.valueOf(rsp.getStatusLine().getStatusCode()).equals(checkedStatus) && location.equals(checkedLocation))) {
-			throw new Exception("PMIS登录失败，请检查输入的用户名及密码！");
-		}
-	}
-
-	private void index() throws Exception {
-		// Request Index.
-		communication.sendRequest(indexReq);
-	}
-
-	private String query(FetchMonthRecordInput fmri) throws Exception {
-		// Query Data
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(fmri.year, fmri.month - 1, 1);
-		calendar.get(Calendar.YEAR);
-		calendar.get(Calendar.MONTH);
-		calendar.get(Calendar.DAY_OF_MONTH);
-		Date minDate = calendar.getTime();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String start = sdf.format(minDate);
-		calendar.set(fmri.year, fmri.month - 1, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
-		calendar.get(Calendar.YEAR);
-		calendar.get(Calendar.MONTH);
-		calendar.get(Calendar.DAY_OF_MONTH);
-		Date maxDate = calendar.getTime();
-		String end = sdf.format(maxDate);
-		queryReq.setContent("beginLogTime=" + start + "&endLogTime=" + end + "&page=1&rows=31");
-		communication.sendRequest(queryReq);
-		return communication.getContent();
 	}
 }

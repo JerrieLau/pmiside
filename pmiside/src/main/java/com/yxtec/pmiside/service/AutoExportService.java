@@ -14,6 +14,6 @@ public interface AutoExportService {
 	/**
 	 * 导出
 	 */
-	public void export();
+	public void export() throws Exception;
 	
 }
